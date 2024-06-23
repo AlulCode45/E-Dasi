@@ -1,5 +1,16 @@
--- AlterTable
-ALTER TABLE `operator` ADD COLUMN `token` VARCHAR(191) NULL;
+-- CreateTable
+CREATE TABLE `Operator` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `nama` VARCHAR(191) NOT NULL,
+    `username` VARCHAR(191) NOT NULL,
+    `password` VARCHAR(191) NOT NULL,
+    `fotoProfile` VARCHAR(191) NULL DEFAULT 'profile.jpg',
+    `token` VARCHAR(191) NULL,
+    `role` ENUM('operator') NULL DEFAULT 'operator',
+
+    UNIQUE INDEX `Operator_username_key`(`username`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Siswa` (
@@ -10,8 +21,8 @@ CREATE TABLE `Siswa` (
     `alamat` VARCHAR(191) NOT NULL,
     `jenisKelamin` VARCHAR(191) NOT NULL,
     `kelasId` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
 
     UNIQUE INDEX `Siswa_nis_key`(`nis`),
     PRIMARY KEY (`id`)
@@ -23,8 +34,8 @@ CREATE TABLE `Kelas` (
     `nama` VARCHAR(191) NOT NULL,
     `jurusanId` INTEGER NOT NULL,
     `tahunAjaranId` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -34,8 +45,8 @@ CREATE TABLE `Jurusan` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nama` VARCHAR(191) NOT NULL,
     `deskripsi` VARCHAR(191) NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -46,8 +57,8 @@ CREATE TABLE `Guru` (
     `nama` VARCHAR(191) NOT NULL,
     `nip` VARCHAR(191) NOT NULL,
     `alamat` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
 
     UNIQUE INDEX `Guru_nip_key`(`nip`),
     PRIMARY KEY (`id`)
@@ -59,8 +70,8 @@ CREATE TABLE `MataPelajaran` (
     `nama` VARCHAR(191) NOT NULL,
     `kode` VARCHAR(191) NOT NULL,
     `guruId` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
 
     UNIQUE INDEX `MataPelajaran_kode_key`(`kode`),
     PRIMARY KEY (`id`)
@@ -70,8 +81,8 @@ CREATE TABLE `MataPelajaran` (
 CREATE TABLE `TahunAjaran` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `tahun` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
 
     UNIQUE INDEX `TahunAjaran_tahun_key`(`tahun`),
     PRIMARY KEY (`id`)
@@ -85,8 +96,8 @@ CREATE TABLE `OrangTua` (
     `telepon` VARCHAR(191) NOT NULL,
     `alamat` VARCHAR(191) NOT NULL,
     `siswaId` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

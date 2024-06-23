@@ -2,10 +2,10 @@ import { NextResponse } from "next/server"
 
 interface responseData {
     data?: object | string | null
-    code: number
+    code?: number
     message?: string | null
 }
-function responseApi({ message, data, code }: responseData) {
+function responseApi({ message, data, code = 200 }: responseData) {
     return NextResponse.json({
         data: data,
         message: message,

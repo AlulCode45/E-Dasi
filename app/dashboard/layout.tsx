@@ -1,13 +1,13 @@
 'use client'
-import { Inter } from "next/font/google";
+import {Inter} from "next/font/google";
 import "../globals.css";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import {useState} from "react";
+import {usePathname} from "next/navigation";
 
 import "primereact/resources/themes/lara-light-cyan/theme.css";
-import { FilterMatchMode, PrimeReactProvider } from "primereact/api";
+import {PrimeReactProvider} from "primereact/api";
 
 const inter = Inter({ subsets: ["latin"] });
 

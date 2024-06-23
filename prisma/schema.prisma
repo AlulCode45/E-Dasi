@@ -13,6 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Operator {
+  id          Int           @id @default(autoincrement())
+  nama        String
+  username    String        @unique
+  password    String
+  fotoProfile String?       @default("profile.jpg")
+  token       String?
+  role        RoleOperator? @default(operator)
+}
+
+enum RoleOperator {
+  operator
+}
+
 model Siswa {
   id           Int        @id @default(autoincrement())
   nama         String
@@ -23,8 +37,8 @@ model Siswa {
   kelasId      Int
   kelas        Kelas      @relation(fields: [kelasId], references: [id])
   orangTua     OrangTua[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  createdAt    DateTime?  @default(now())
+  updatedAt    DateTime?  @updatedAt
 }
 
 model Kelas {
@@ -35,17 +49,17 @@ model Kelas {
   tahunAjaranId Int
   tahunAjaran   TahunAjaran @relation(fields: [tahunAjaranId], references: [id])
   siswa         Siswa[]
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  createdAt     DateTime?   @default(now())
+  updatedAt     DateTime?   @updatedAt
 }
 
 model Jurusan {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   nama      String
   deskripsi String?
   kelas     Kelas[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Guru {
@@ -54,36 +68,36 @@ model Guru {
   nip           String          @unique
   alamat        String
   mataPelajaran MataPelajaran[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime?       @default(now())
+  updatedAt     DateTime?       @updatedAt
 }
 
 model MataPelajaran {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   nama      String
-  kode      String   @unique
+  kode      String    @unique
   guruId    Int
-  guru      Guru     @relation(fields: [guruId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  guru      Guru      @relation(fields: [guruId], references: [id])
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model TahunAjaran {
-  id        Int      @id @default(autoincrement())
-  tahun     String   @unique
+  id        Int       @id @default(autoincrement())
+  tahun     String    @unique
   kelas     Kelas[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model OrangTua {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   nama      String
   hubungan  String
   telepon   String
   alamat    String
   siswaId   Int
-  siswa     Siswa    @relation(fields: [siswaId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  siswa     Siswa     @relation(fields: [siswaId], references: [id])
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
