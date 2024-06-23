@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:3000/api
+
+### Auth Request
+POST {{baseUrl}}/auth HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "operator",
+    "password": "12345"
+}
+
+
+### Logout Request
+POST {{baseUrl}}/auth/logout HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer XdYsC9ubIXj1RqM1j3VQ6O7PrL1FPdIJT9FxE11t
