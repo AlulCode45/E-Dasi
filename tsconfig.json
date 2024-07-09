@@ -34,7 +34,10 @@
       "@controllers/*": [
         "./controllers/*"
       ]
-    }
+    },
+    "typeRoots": [
+      "./types"
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -44,5 +47,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

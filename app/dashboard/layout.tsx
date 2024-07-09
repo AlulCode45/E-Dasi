@@ -1,18 +1,21 @@
 'use client'
-import {Inter} from "next/font/google";
+import { Inter } from "next/font/google";
 import "../globals.css";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
-import {useState} from "react";
-import {usePathname} from "next/navigation";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 import "primereact/resources/themes/lara-light-cyan/theme.css";
-import {PrimeReactProvider} from "primereact/api";
+import { PrimeReactProvider } from "primereact/api";
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }: Readonly<{
+export default function RootLayout({ children, session }: Readonly<{
     children: React.ReactNode;
+    session: Session
 }>) {
     const [sideopen, setSideopen] = useState(false);
     const path = usePathname();
@@ -29,18 +32,20 @@ export default function RootLayout({ children }: Readonly<{
     const menuActive = getActiveMenu();
 
     return (
-        <PrimeReactProvider>
-            <html lang="en">
-                <body className={inter.className}>
-                    <div className="lg:flex h-screen">
-                        <Sidebar sideopen={sideopen} setSideOpen={setSideopen} menuActive={menuActive} />
-                        <main className="p-5 w-full lg:w-4/5 h-screen overflow-y-auto">
-                            <Topbar setSideopen={setSideopen} />
-                            {children}
-                        </main>
-                    </div>
-                </body>
-            </html>
-        </PrimeReactProvider>
+        <SessionProvider session={session}>
+            <PrimeReactProvider>
+                <html lang="en">
+                    <body className={inter.className}>
+                        <div className="lg:flex h-screen">
+                            <Sidebar sideopen={sideopen} setSideOpen={setSideopen} menuActive={menuActive} />
+                            <main className="p-5 w-full lg:w-4/5 h-screen overflow-y-auto">
+                                <Topbar setSideopen={setSideopen} />
+                                {children}
+                            </main>
+                        </div>
+                    </body>
+                </html>
+            </PrimeReactProvider>
+        </SessionProvider>
     );
 }

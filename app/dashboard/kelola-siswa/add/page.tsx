@@ -30,7 +30,7 @@ export default function TambahSiswa() {
                     </div>
                     <div className="my-2">
                         <label htmlFor="" className="block text-sm mb-1">Nama Lengkap</label>
-                        <input type="number" className="w-full p-2 border focus:outline-blue-200 focus:shadow-blue-400" placeholder="Masukan Nama Lengkap" />
+                        <input type="text" className="w-full p-2 border focus:outline-blue-200 focus:shadow-blue-400" placeholder="Masukan Nama Lengkap" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="my-2">
