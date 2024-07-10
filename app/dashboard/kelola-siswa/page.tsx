@@ -6,20 +6,39 @@ import { useState, ChangeEvent, useEffect } from 'react';
 import { HiSearch } from '@react-icons/all-files/hi/HiSearch';
 import Link from 'next/link';
 import { client } from '@/utils/axiosUtils';
-
+import Swal from 'sweetalert2';
 
 interface Student {
     nisn: string;
     nama: string;
-    nis: number;
+    nis: string;
     tanggalLahir: string;
     alamat: string;
     jenisKelamin: string;
 }
 
 export default function KelolaSiswa() {
-    const [students, setStudent] = useState<Student[]>([]);
+    const [students, setStudents] = useState<Student[]>([]);
     const [globalFilter, setGlobalFilter] = useState<string | null>(null);
+
+    const handleDelete = async (nisn: string) => {
+        try {
+            await client.delete(`/siswa/${nisn}`);
+            Swal.fire({
+                title: "Sukses",
+                text: "Sukses hapus siswa",
+                icon: "success"
+            });
+            setStudents((prevData) => prevData.filter((d) => d.nisn !== nisn));
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                title: "Gagal",
+                text: "Gagal hapus siswa",
+                icon: "error"
+            });
+        }
+    }
 
     const handleGlobalFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
         setGlobalFilter(e.target.value);
@@ -27,31 +46,33 @@ export default function KelolaSiswa() {
 
     const editRowTemplate = (siswa: Student) => {
         return (
-            <Link className='bg-blue-200 px-3 py-2 rounded' href={`/dashboard/kelola-siswa/edit/${siswa?.nisn}`} >Edit</Link>
-        )
+            <div className='flex gap-2'>
+                <Link className='bg-blue-200 px-3 py-2 rounded' href={`/dashboard/kelola-siswa/${siswa?.nisn}`} >View</Link>
+                <Link className='bg-yellow-200 px-3 py-2 rounded' href={`/dashboard/kelola-siswa/edit/${siswa?.nisn}`} >Edit</Link>
+                <button className='bg-red-200 px-3 py-2 rounded' onClick={() => handleDelete(siswa.nisn)}>Delete</button>
+            </div>
+        );
     }
 
     useEffect(() => {
         const getStudent = async () => {
-            return await client.get('/siswa').then(res => {
-                res.data.data.map((d: Student) => {
-                    setStudent(prevData => {
-                        return [...prevData, {
-                            nisn: d.nisn,
-                            nis: d.nis,
-                            nama: d.nama,
-                            alamat: d.alamat,
-                            jenisKelamin: d.jenisKelamin,
-                            tanggalLahir: d.tanggalLahir
-                        }]
-                    })
-                })
-            }).catch(err => {
-                console.log(err)
-            })
+            try {
+                const res = await client.get('/siswa');
+                const studentsData = res.data.data.map((d: Student) => ({
+                    nisn: d.nisn,
+                    nis: d.nis,
+                    nama: d.nama,
+                    alamat: d.alamat,
+                    jenisKelamin: d.jenisKelamin,
+                    tanggalLahir: d.tanggalLahir
+                }));
+                setStudents(studentsData);
+            } catch (err) {
+                console.error(err);
+            }
         }
-        getStudent()
-    }, [])
+        getStudent();
+    }, []);
 
     return (
         <>
@@ -63,7 +84,7 @@ export default function KelolaSiswa() {
                             <span className="p-inputgroup-addon">
                                 <HiSearch />
                             </span>
-                            <input type="text" placeholder='Cari ...' className='border px-3 py-2 w-full focus:outline-none' onChange={e => handleGlobalFilterChange(e)} />
+                            <input type="text" placeholder='Cari ...' className='border px-3 py-2 w-full focus:outline-none' onChange={handleGlobalFilterChange} />
                         </div>
                         <Link href={'/dashboard/kelola-siswa/add'} className='bg-blue-400 text-white font-semibold px-3 py-2'>Tambah</Link>
                     </div>
@@ -87,5 +108,5 @@ export default function KelolaSiswa() {
                 </DataTable>
             </div>
         </>
-    )
+    );
 }
