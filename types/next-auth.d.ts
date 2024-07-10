@@ -10,7 +10,8 @@ declare module "next-auth" {
             nama: string | null,
             username: string | null,
             fotoProfile: string | null,
-            role: string | null
+            role: string | null,
+            apiToken: string | null
         }
     }
 
@@ -18,14 +19,19 @@ declare module "next-auth" {
         nama: string | null,
         username: string | null,
         fotoProfile: string | null,
-        role: string | null
+        role: string | null,
+        apiToken: string | null
     }
 
     interface User {
-        nama: string | null,
-        username: string | null,
-        fotoProfile: string | null,
-        role: string | null
+        data: {
+            nama: string | null,
+            username: string | null,
+            fotoProfile: string | null,
+            role: string | null,
+            apiToken: string | null
+        },
+        token: string | null
     }
 }
 
@@ -37,6 +43,7 @@ declare module "next-auth/jwt" {
         nama: string | null,
         username: string | null,
         fotoProfile: string | null,
-        role: string | null
+        role: string | null,
+        apiToken: string | null
     }
 }

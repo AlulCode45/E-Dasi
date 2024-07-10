@@ -24,7 +24,8 @@ const handler = NextAuth({
 
                 // Ensure user data structure matches what you're expecting
                 if (user && user.data) {
-                    return user.data;
+                    console.log(user)
+                    return user;
                 }
 
                 return null;
@@ -37,10 +38,11 @@ const handler = NextAuth({
     callbacks: {
         async jwt({ token, account, user }) {
             if (user) {
-                token.nama = user.nama ?? null;
-                token.username = user.username ?? null;
-                token.fotoProfile = user.fotoProfile ?? null;
-                token.role = user.role ?? null;
+                token.nama = user?.data?.nama ?? null;
+                token.username = user.data.username ?? null;
+                token.fotoProfile = user.data.fotoProfile ?? null;
+                token.role = user.data.role ?? null;
+                token.apiToken = user.token ?? null
             }
             return token;
         },
@@ -51,6 +53,7 @@ const handler = NextAuth({
                 session.user.fotoProfile = token.fotoProfile ?? null;
                 session.user.role = token.role ?? null;
                 session.user.username = token.username ?? null;
+                session.user.apiToken = token.apiToken ?? null
             }
             return session;
         },

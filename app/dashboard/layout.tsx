@@ -34,17 +34,15 @@ export default function RootLayout({ children, session }: Readonly<{
     return (
         <SessionProvider session={session}>
             <PrimeReactProvider>
-                <html lang="en">
-                    <body className={inter.className}>
-                        <div className="lg:flex h-screen">
-                            <Sidebar sideopen={sideopen} setSideOpen={setSideopen} menuActive={menuActive} />
-                            <main className="p-5 w-full lg:w-4/5 h-screen overflow-y-auto">
-                                <Topbar setSideopen={setSideopen} />
-                                {children}
-                            </main>
-                        </div>
-                    </body>
-                </html>
+                <div className={inter.className}>
+                    <div className="lg:flex h-screen">
+                        <Sidebar sideopen={sideopen} setSideOpen={setSideopen} menuActive={menuActive} />
+                        <main className="p-5 w-full lg:w-4/5 h-screen overflow-y-auto">
+                            <Topbar setSideopen={setSideopen} />
+                            {children}
+                        </main>
+                    </div>
+                </div>
             </PrimeReactProvider>
         </SessionProvider>
     );

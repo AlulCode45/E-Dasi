@@ -17,6 +17,9 @@ import {
     from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { faker } from '@faker-js/faker'
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { client } from "@/utils/axiosUtils";
 
 ChartJS.register(
     CategoryScale,
@@ -53,25 +56,58 @@ export const dataChart = {
 };
 
 export default function Dashboard() {
+    const [kelas, setKelas] = useState([])
+    const [siswa, setSiswa] = useState([])
+    const [guru, setGuru] = useState([])
+
+    useEffect(() => {
+        const getKelas = async () => {
+            return await client.get('/kelas').then(res => {
+                setKelas(res.data.data)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+
+        const getSiswa = async () => {
+            return await client.get('/siswa').then(res => {
+                setSiswa(res.data.data)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        const getGuru = async () => {
+            return await client.get('/guru').then(res => {
+                setGuru(res.data.data)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        getKelas()
+        getSiswa()
+        getGuru()
+
+    }, [])
+
     const cardData = [
         {
             title: "Jumlah Siswa",
             icon: <HiOutlineUser className="text-4xl text-blue-500" />,
-            count: 1200,
+            count: siswa.length,
             color: 'blue',
             unit: 'siswa'
         },
         {
             title: "Jumlah Kelas",
             icon: <HiOutlineOfficeBuilding className="text-4xl text-red-500" />,
-            count: 11,
+            count: kelas.length,
             color: 'red',
             unit: 'kelas'
         },
         {
             title: "Jumlah Guru",
             icon: <HiOutlineUsers className="text-4xl text-yellow-500" />,
-            count: 100,
+            count: guru.length,
             color: 'yellow',
             unit: 'guru'
         }
