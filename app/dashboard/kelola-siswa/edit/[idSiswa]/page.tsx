@@ -12,17 +12,20 @@ interface Student {
     tanggalLahir: string | null
     alamat: string | null
     jenisKelamin: string | null
+    kelasId: number | null  // sesuai dengan skema Prisma
 }
 
 export default function EditSiswa() {
     const { idSiswa } = useParams()
+    const [kelas, setKelas] = useState([])
     const [formData, setFormData] = useState<Student>({
         nisn: null,
         nis: null,
         nama: null,
         tanggalLahir: null,
         alamat: null,
-        jenisKelamin: null
+        jenisKelamin: null,
+        kelasId: null
     })
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -47,6 +50,17 @@ export default function EditSiswa() {
         })
     }
 
+
+    useEffect(() => {
+        const getKelas = async () => {
+            return await client.get('/kelas').then(res => {
+                setKelas(res.data.data)
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        getKelas()
+    }, [])
     useEffect(() => {
         const getData = async () => {
             return await client.get(`${process.env.API_URL}/siswa/${idSiswa}`).then(res => {
@@ -57,7 +71,8 @@ export default function EditSiswa() {
                     nama: res.data.data.nama,
                     tanggalLahir: new Date(res.data.data.tanggalLahir).toISOString().split('T')[0],
                     alamat: res.data.data.alamat,
-                    jenisKelamin: res.data.data.jenisKelamin
+                    jenisKelamin: res.data.data.jenisKelamin,
+                    kelasId: res.data.data.kelasId
                 })
             }).catch(err => {
                 console.error(err)
@@ -101,6 +116,17 @@ export default function EditSiswa() {
                                 <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
+                    </div>
+                    <div className="my-2">
+                        <label htmlFor="" className="block text-sm mb-1">Kelas</label>
+                        <select className="w-full p-2 border focus:outline-blue-200 focus:shadow-blue-400" value={formData.kelasId ?? ""} name="kelasId" onChange={handleForm}>
+                            <option value="">Pilih Kelas</option>
+                            {
+                                kelas?.map((d: any, i) => (
+                                    <option value={d?.id} key={i}>{d?.nama} - {d?.tahunAjaran.tahun}</option>
+                                ))
+                            }
+                        </select>
                     </div>
                     <div className="my-2">
                         <label htmlFor="" className="block text-sm mb-1">Alamat</label>

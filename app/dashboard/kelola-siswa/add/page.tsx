@@ -116,7 +116,7 @@ export default function TambahSiswa() {
                             <option value="">Pilih Kelas</option>
                             {
                                 kelas?.map((d: any, i) => (
-                                    <option value={d?.id} key={i}>{d?.nama}</option>
+                                    <option value={d?.id} key={i}>{d?.nama} - {d?.tahunAjaran.tahun}</option>
                                 ))
                             }
                         </select>
