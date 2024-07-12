@@ -24,7 +24,6 @@ const handler = NextAuth({
 
                 // Ensure user data structure matches what you're expecting
                 if (user && user.data) {
-                    console.log(user)
                     return user;
                 }
 
@@ -33,7 +32,8 @@ const handler = NextAuth({
         })
     ],
     session: {
-        strategy: 'jwt'
+        strategy: 'jwt',
+        maxAge: 5 * 60 * 60,
     },
     callbacks: {
         async jwt({ token, account, user }) {
