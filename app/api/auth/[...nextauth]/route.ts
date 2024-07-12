@@ -35,6 +35,10 @@ const handler = NextAuth({
         strategy: 'jwt',
         maxAge: 5 * 60 * 60,
     },
+    jwt: {
+        maxAge: 5 * 60 * 60,
+        secret: process.env.NEXTAUTH_SECRET
+    },
     callbacks: {
         async jwt({ token, account, user }) {
             if (user) {

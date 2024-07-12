@@ -13,9 +13,12 @@ let session: Session | null;
 const initializeSessionAndClient = async () => {
     session = await getSession();
 
+    //Alternatif jika menggunakan axios biasa
+    // session = await axios.get('/api/auth/session').then(res => res?.data);
+
     // Menambahkan interceptor setelah session telah diinisialisasi
     client.interceptors.request.use((config) => {
-        if (session && session.user && session.user.apiToken) {
+        if (session?.user?.apiToken) {
             config.headers.Authorization = `Bearer ${session.user.apiToken}`;
         }
         return config;

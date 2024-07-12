@@ -25,23 +25,23 @@ export default function KelolaSiswa() {
         setGlobalFilter(e.target.value);
     };
 
-    const handleDelete = async (id: number) => {
-        try {
-            await client.delete(`/kelas/${id}`);
-            setKelas(prevData => prevData.filter(data => data.id !== id))
-            Swal.fire({
-                title: "Sukses",
-                text: "Sukses hapus kelas",
-                icon: "success"
+    const handleDelete = async (id: number | null) => {
+        return await client.delete(`/kelas/${id}`)
+            .then(() => {
+                setKelas(prevData => prevData.filter(data => data.id !== id));
+                Swal.fire({
+                    title: "Sukses",
+                    text: "Sukses hapus kelas",
+                    icon: "success"
+                });
+            }).catch((err) => {
+                Swal.fire({
+                    title: "Gagal",
+                    text: "Gagal hapus kelas",
+                    icon: "error"
+                });
+                console.log(err);
             });
-        } catch (err) {
-            Swal.fire({
-                title: "Gagal",
-                text: "Gagal hapus kelas",
-                icon: "error"
-            });
-            console.log(err)
-        }
     }
 
     const editRowTemplate = (kelas: Kelas) => {
@@ -49,7 +49,21 @@ export default function KelolaSiswa() {
             <div className='flex gap-2'>
                 <Link className='bg-blue-200 px-3 py-2 rounded' href={`/dashboard/kelola-kelas/${kelas?.id}`}>View</Link>
                 <Link className='bg-yellow-200 px-3 py-2 rounded' href={`/dashboard/kelola-kelas/edit/${kelas?.id}`} >Edit</Link>
-                <button className='bg-red-200 px-3 py-2 rounded' onClick={() => handleDelete(kelas.id!)}>Delete</button>
+                <button className='bg-red-200 px-3 py-2 rounded' onClick={() => {
+                    //make confirmation dialog before delete
+                    Swal.fire({
+                        title: 'Apakah Anda Yakin?',
+                        text: 'Menghapus Kelas sama dengan menghapus semua data siswa yang terkait dengan kelas ini. Data yang dihapus tidak dapat dikembalikan !',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, Hapus',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            handleDelete(kelas.id)
+                        }
+                    })
+                }}>Delete</button>
             </div>
         )
     }
