@@ -64,7 +64,7 @@ export default function KelolaSiswa() {
                     nama: d.nama,
                     alamat: d.alamat,
                     jenisKelamin: d.jenisKelamin,
-                    tanggalLahir: d.tanggalLahir
+                    tanggalLahir: new Date(d.tanggalLahir).toISOString().split('T')[0]
                 }));
                 setStudents(studentsData);
             } catch (err) {
