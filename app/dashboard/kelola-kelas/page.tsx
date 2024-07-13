@@ -85,7 +85,7 @@ export default function KelolaSiswa() {
         <>
             <div className="card bg-white shadow-md p-5 border-t-4 border-t-blue-400 rounded-md">
                 <div className="flex justify-between mb-4 items-center">
-                    <h1 className='font-semibold'>Data Siswa</h1>
+                    <h1 className='font-semibold'>Data Kelas</h1>
                     <div className="action flex gap-3">
                         <div className="p-inputgroup">
                             <span className="p-inputgroup-addon">
@@ -93,7 +93,7 @@ export default function KelolaSiswa() {
                             </span>
                             <input type="text" placeholder='Cari ...' className='border px-3 py-2 w-full focus:outline-none' onChange={e => handleGlobalFilterChange(e)} />
                         </div>
-                        <Link href={'/dashboard/kelola-siswa/add'} className='bg-blue-400 text-white font-semibold px-3 py-2'>Tambah</Link>
+                        <Link href={'/dashboard/kelola-kelas/add'} className='bg-blue-400 text-white font-semibold px-3 py-2'>Tambah</Link>
                     </div>
                 </div>
                 <DataTable value={kelas} tableStyle={{ minWidth: '50rem' }}

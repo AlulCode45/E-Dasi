@@ -3,6 +3,8 @@ import { HiOutlineHome } from '@react-icons/all-files/hi/HiOutlineHome';
 import { HiOutlineOfficeBuilding } from '@react-icons/all-files/hi/HiOutlineOfficeBuilding';
 import { HiOutlineUser } from '@react-icons/all-files/hi/HiOutlineUser';
 import { HiOutlineUsers } from '@react-icons/all-files/hi/HiOutlineUsers';
+import { HiOutlineCalendar } from '@react-icons/all-files/hi/HiOutlineCalendar';
+import { HiOutlineBookOpen } from '@react-icons/all-files/hi/HiOutlineBookOpen';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -43,6 +45,12 @@ export default function Sidebar({ sideopen, setSideOpen, menuActive }: SidebarPr
                     </Link>
                     <Link className={`py-4 px-5 flex gap-2 items-center rounded-md transition-all ease-in-out duration-150 ${menuActive === 3 ? 'bg-blue-100 font-semibold text-blue-500' : 'hover:bg-blue-100 hover:font-semibold hover:text-blue-500'}`} href={'/dashboard/kelola-guru'}>
                         <HiOutlineUser />Kelola Guru
+                    </Link>
+                    <Link className={`py-4 px-5 flex gap-2 items-center rounded-md transition-all ease-in-out duration-150 ${menuActive === 4 ? 'bg-blue-100 font-semibold text-blue-500' : 'hover:bg-blue-100 hover:font-semibold hover:text-blue-500'}`} href={'/dashboard/kelola-jurusan'}>
+                        <HiOutlineBookOpen />Kelola Jurusan
+                    </Link>
+                    <Link className={`py-4 px-5 flex gap-2 items-center rounded-md transition-all ease-in-out duration-150 ${menuActive === 5 ? 'bg-blue-100 font-semibold text-blue-500' : 'hover:bg-blue-100 hover:font-semibold hover:text-blue-500'}`} href={'/dashboard/kelola-tahun-ajaran'}>
+                        <HiOutlineCalendar />Kelola Tahun Ajaran
                     </Link>
                 </div>
                 <div className="logout absolute bottom-10 left-5">
