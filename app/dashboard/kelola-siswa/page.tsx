@@ -7,15 +7,7 @@ import { HiSearch } from '@react-icons/all-files/hi/HiSearch';
 import Link from 'next/link';
 import { client } from '@/utils/axiosUtils';
 import Swal from 'sweetalert2';
-
-interface Student {
-    nisn: string;
-    nama: string;
-    nis: string;
-    tanggalLahir: string;
-    alamat: string;
-    jenisKelamin: string;
-}
+import { Student } from '@/interfaces/siswa.interface';
 
 export default function KelolaSiswa() {
     const [students, setStudents] = useState<Student[]>([]);

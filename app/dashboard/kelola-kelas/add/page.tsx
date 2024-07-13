@@ -1,13 +1,4 @@
 'use client'
-interface Student {
-    nisn: string;
-    nama: string;
-    nis: number;
-    tanggalLahir: string;
-    alamat: string;
-    jenisKelamin: string;
-}
-
 export default function TambahSiswa() {
     return (
         <>

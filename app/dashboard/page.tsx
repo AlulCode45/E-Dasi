@@ -4,6 +4,10 @@ import CardHeader from "@/components/CardHeader";
 import { HiOutlineOfficeBuilding } from "@react-icons/all-files/hi/HiOutlineOfficeBuilding";
 import { HiOutlineUser } from "@react-icons/all-files/hi/HiOutlineUser";
 import { HiOutlineUsers } from "@react-icons/all-files/hi/HiOutlineUsers";
+import { Bar } from 'react-chartjs-2';
+import { faker } from '@faker-js/faker'
+import { useEffect, useState } from "react";
+import { client } from "@/utils/axiosUtils";
 
 import {
     Chart as ChartJS,
@@ -15,11 +19,6 @@ import {
     Legend,
 }
     from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker'
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { client } from "@/utils/axiosUtils";
 
 ChartJS.register(
     CategoryScale,

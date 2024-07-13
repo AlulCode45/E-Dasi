@@ -7,15 +7,8 @@ import { HiSearch } from '@react-icons/all-files/hi/HiSearch';
 import Link from 'next/link';
 import { client } from '@/utils/axiosUtils';
 import Swal from 'sweetalert2';
+import { Kelas } from '@/interfaces/kelas.interface';
 
-
-interface Kelas {
-    id: number | null
-    nama: string | null
-    jurusan: string | null
-    jumlahSiswa: number | null
-    tahunAjaran: string | null
-}
 
 export default function KelolaSiswa() {
     const [kelas, setKelas] = useState<Kelas[]>([])

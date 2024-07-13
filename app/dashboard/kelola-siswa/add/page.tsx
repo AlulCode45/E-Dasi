@@ -1,21 +1,12 @@
 'use client'
 
+import { StudentData } from "@/interfaces/siswa.interface";
 import { client } from "@/utils/axiosUtils";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-interface Student {
-    nisn: number | null;  // sesuai dengan skema Prisma
-    nama: string | null;
-    nis: string | null;   // sesuai dengan skema Prisma
-    tanggalLahir: string | null;
-    alamat: string | null;
-    jenisKelamin: string | null;
-    kelasId: number | null;  // sesuai dengan skema Prisma
-}
-
 export default function TambahSiswa() {
-    const [formData, setFormData] = useState<Student>({
+    const [formData, setFormData] = useState<StudentData>({
         nisn: null,
         nis: null,
         nama: null,

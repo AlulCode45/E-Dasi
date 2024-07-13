@@ -1,24 +1,14 @@
 'use client'
 
+import { StudentData } from "@/interfaces/siswa.interface";
 import { client } from "@/utils/axiosUtils";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 
-interface Student {
-    nisn: string | null
-    nama: string | null
-    nis: number | null
-    tanggalLahir: string | null
-    alamat: string | null
-    jenisKelamin: string | null
-    kelasId: number | null  // sesuai dengan skema Prisma
-}
-
-export default function EditSiswa() {
+export default function ViewSiswa() {
     const { idSiswa } = useParams()
     const [kelas, setKelas] = useState([])
-    const [formData, setFormData] = useState<Student>({
+    const [formData, setFormData] = useState<StudentData>({
         nisn: null,
         nis: null,
         nama: null,
