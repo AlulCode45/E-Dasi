@@ -7,7 +7,7 @@ import { client } from "@/utils/axiosUtils"
 import { useEffect, useState } from "react"
 import Swal from "sweetalert2"
 
-export default function TambahSiswa() {
+export default function TambahKelas() {
     const [tahunAjaran, setTahunAjaran] = useState<TahunAjaran[]>([])
     const [jurusan, setJurusan] = useState<Jurusan[]>([])
     const [formData, setFormData] = useState<KelasData>({
