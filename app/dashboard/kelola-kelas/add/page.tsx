@@ -67,7 +67,7 @@ export default function TambahKelas() {
             <div className="bg-white p-5 shadow rounded-md">
                 <form onSubmit={handleSubmit}>
                     <div className="flex items-center justify-between">
-                        <h1 className="text-xl">Tambah Siswa</h1>
+                        <h1 className="text-xl">Tambah Kelas</h1>
                         <button type="submit" className='bg-blue-400 text-white font-semibold px-3 py-2'>Simpan</button>
                     </div>
                     <div className="my-2">

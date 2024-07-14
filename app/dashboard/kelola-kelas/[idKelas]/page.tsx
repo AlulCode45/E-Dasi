@@ -80,6 +80,7 @@ export default function ViewKelas() {
                 <form>
                     <div className="flex items-center justify-between">
                         <h1 className="text-xl">Data Kelas</h1>
+                        <Link href={`/dashboard/kelola-kelas/edit/${idKelas}`} className='bg-blue-400 text-white font-semibold px-3 py-2'>Edit Kelas</Link>
                     </div>
                     <div className="my-2">
                         <label htmlFor="" className="block text-sm mb-1">Nama Kelas</label>
