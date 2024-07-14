@@ -2,6 +2,7 @@
 
 import { StudentData } from "@/interfaces/siswa.interface";
 import { client } from "@/utils/axiosUtils";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -58,6 +59,7 @@ export default function ViewSiswa() {
                 <form>
                     <div className="flex items-center justify-between">
                         <h1 className="text-xl">Data Siswa</h1>
+                        <Link href={`/dashboard/kelola-siswa/edit/${idSiswa}`} className='bg-blue-400 text-white font-semibold px-3 py-2'>Edit Siswa</Link>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="my-2">
